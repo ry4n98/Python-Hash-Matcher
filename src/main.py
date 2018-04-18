@@ -3,18 +3,20 @@
 import time
 import math
 
-import hash
+import args
+import hasher
 
-targetHash = "986bd07786ae5e4b4800df7eb16a710de8b8dc2c3bfb29794d97941fc30cb7f9"
+arguments = args.get()
 
-startingInt = 0;
-targetInt = 1000000;
+targetHash = str(arguments['--target'])
+startingInt = int(arguments['--start'])
+targetInt = int(arguments['--end'])
 
 start = time.time() # Start execution timer
 
 currentInt = startingInt;
 while currentInt != targetInt:
-    currentHash = hash.generate(currentInt)
+    currentHash = hasher.generate(currentInt)
     if (currentHash == targetHash):
         print("Match found! Integer value: {:,}".format(currentInt))
         break
@@ -23,4 +25,4 @@ while currentInt != targetInt:
 end = time.time() # Stop execution timer
 executionTime = str(round(end - start, 2))
 
-print("{:,} hashes computed within {} seconds.".format(currentInt, executionTime))
+print("{:,} hashes computed within {} seconds.".format((currentInt - startingInt), executionTime))
